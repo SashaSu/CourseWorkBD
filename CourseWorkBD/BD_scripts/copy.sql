@@ -1,0 +1,11 @@
+COPY Employee FROM 'D:\DB\files\employees.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Product FROM 'D:\DB\files\product.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Warehouse FROM 'D:\DB\files\warehouses.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Tables FROM 'D:\DB\files\mtables.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Dish FROM 'D:\DB\files\dishes.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Orders FROM 'D:\DB\files\orders.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Stored_product FROM 'D:\DB\files\stored_products.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Dish_Product FROM 'D:\DB\files\dish_product.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Order_Dish FROM 'D:\DB\files\order_dish.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Employee_Order FROM 'D:\DB\files\employee_order.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+COPY Account FROM 'D:\DB\files\account.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
