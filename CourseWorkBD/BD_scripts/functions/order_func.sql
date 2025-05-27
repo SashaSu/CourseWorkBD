@@ -6,12 +6,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION update_order(p_id INT, p_table_id INT, p_status VARCHAR)
+CREATE OR REPLACE FUNCTION update_order(p_id INT, p_status VARCHAR)
     RETURNS VOID AS $$
 BEGIN
     UPDATE Orders
-    SET table_id = p_table_id,
-        status = p_status
+    SET status = p_status
     WHERE id = p_id;
 END;
 $$ LANGUAGE plpgsql;

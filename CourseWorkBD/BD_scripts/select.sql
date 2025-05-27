@@ -45,3 +45,48 @@ DO $$
         END IF;
     END;
 $$;
+
+DO $$
+    DECLARE
+        max_id INT;
+        seq_name TEXT := 'orders_id_seq';
+    BEGIN
+        -- Получаем максимальный id из таблицы Employee
+        SELECT MAX(id) INTO max_id FROM Orders;
+
+        IF max_id IS NOT NULL THEN
+            -- Устанавливаем значение последовательности на max_id
+            EXECUTE format('SELECT setval(%L, %s, true)', seq_name, max_id);
+        END IF;
+    END;
+$$;
+
+DO $$
+    DECLARE
+        max_id INT;
+        seq_name TEXT := 'stored_product_id_seq';
+    BEGIN
+        -- Получаем максимальный id из таблицы Employee
+        SELECT MAX(id) INTO max_id FROM Stored_product;
+
+        IF max_id IS NOT NULL THEN
+            -- Устанавливаем значение последовательности на max_id
+            EXECUTE format('SELECT setval(%L, %s, true)', seq_name, max_id);
+        END IF;
+    END;
+$$;
+
+DO $$
+    DECLARE
+        max_id INT;
+        seq_name TEXT := 'product_id_seq';
+    BEGIN
+        -- Получаем максимальный id из таблицы Employee
+        SELECT MAX(id) INTO max_id FROM product;
+
+        IF max_id IS NOT NULL THEN
+            -- Устанавливаем значение последовательности на max_id
+            EXECUTE format('SELECT setval(%L, %s, true)', seq_name, max_id);
+        END IF;
+    END;
+$$;

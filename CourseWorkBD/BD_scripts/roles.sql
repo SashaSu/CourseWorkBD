@@ -2,34 +2,34 @@ REVOKE ALL ON account FROM PUBLIC;
 
 GRANT EXECUTE ON FUNCTION login(VARCHAR(256), VARCHAR(256)) TO PUBLIC;
 
-DROP ROLE IF EXISTS waiter_role;
 CREATE ROLE waiter_role LOGIN PASSWORD 'waiter';
 
-DROP ROLE IF EXISTS cook_role;
 CREATE ROLE cook_role LOGIN PASSWORD 'cook';
 
-DROP ROLE IF EXISTS admin_role;
 CREATE ROLE admin_role LOGIN PASSWORD 'admin';
 
-DROP ROLE IF EXISTS warehouse_manager_role;
 CREATE ROLE warehouse_manager_role LOGIN PASSWORD 'manager';
 
 -- Официант
-GRANT SELECT, INSERT, UPDATE ON Orders TO waiter_role; -- SELECT USE-CASE
+GRANT SELECT, INSERT, UPDATE, DELETE ON Orders TO waiter_role; -- SELECT USE-CASE
 GRANT SELECT ON Tables TO waiter_role;
 GRANT SELECT ON Dish TO waiter_role; -- USE CASE
-GRANT SELECT, INSERT ON Order_Dish TO waiter_role; -- 1 -> USE-CASE
+GRANT SELECT, INSERT, UPDATE, DELETE ON order_dish TO waiter_role; -- 1 -> USE-CASE
+GRANT USAGE, SELECT, UPDATE ON SEQUENCE orders_id_seq TO waiter_role;
 
 -- Повар
 GRANT SELECT, UPDATE ON Orders TO cook_role; -- SELECT USE-CASE
 GRANT SELECT, UPDATE ON Order_Dish TO cook_role; -- 1 + -. USE-CASE
+GRANT SELECT ON Product TO cook_role;
+GRANT SELECT ON Dish_Product TO cook_role;
 GRANT SELECT ON Dish TO cook_role;
 
 -- Кладовщик
-GRANT SELECT, INSERT, UPDATE ON Product TO warehouse_manager_role; -- USE-CASE
+GRANT SELECT, INSERT, UPDATE, DELETE ON Product TO warehouse_manager_role; -- USE-CASE
 GRANT SELECT, INSERT, UPDATE ON Warehouse TO warehouse_manager_role; -- USE-CASE
-GRANT SELECT, INSERT, UPDATE ON Stored_product TO warehouse_manager_role; -- USE-CASE
-
+GRANT SELECT, INSERT, UPDATE, DELETE ON Stored_product TO warehouse_manager_role; -- USE-CASE
+GRANT USAGE, SELECT, UPDATE ON SEQUENCE stored_product_id_seq TO warehouse_manager_role;
+GRANT USAGE, SELECT, UPDATE ON SEQUENCE product_id_seq TO warehouse_manager_role;
 -- Админ
                                                                           
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM admin_role;                                                                        
