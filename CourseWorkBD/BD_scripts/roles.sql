@@ -1,3 +1,7 @@
+REVOKE ALL ON account FROM PUBLIC;
+
+GRANT EXECUTE ON FUNCTION login(VARCHAR(256), VARCHAR(256)) TO PUBLIC;
+
 DROP ROLE IF EXISTS waiter_role;
 CREATE ROLE waiter_role LOGIN PASSWORD 'waiter';
 
@@ -27,8 +31,14 @@ GRANT SELECT, INSERT, UPDATE ON Warehouse TO warehouse_manager_role; -- USE-CASE
 GRANT SELECT, INSERT, UPDATE ON Stored_product TO warehouse_manager_role; -- USE-CASE
 
 -- Админ
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin_role;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin_role;
+                                                                          
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM admin_role;                                                                        
+GRANT SELECT, INSERT, UPDATE, DELETE ON Employee TO admin_role;
+GRANT SELECT ON Orders TO admin_role;
+GRANT SELECT, UPDATE ON Tables TO admin_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Account TO admin_role;
+GRANT USAGE, SELECT, UPDATE ON SEQUENCE employee_id_seq TO admin_role;
+GRANT USAGE, SELECT, UPDATE ON SEQUENCE account_id_seq TO admin_role;
 
 -- Регистрация
 

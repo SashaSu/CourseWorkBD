@@ -31,21 +31,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION delete_employee(lastname VARCHAR)
+CREATE OR REPLACE FUNCTION delete_employee(emp_id INT)
     RETURNS VOID AS $$
 BEGIN
-    DELETE FROM Employee
-    WHERE split_part(name, ' ', 1) ILIKE lastname;
+    DELETE FROM Employee e
+    WHERE e.id = emp_id;
 END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION search_employees_by_lastname(lastname VARCHAR)
+CREATE OR REPLACE FUNCTION search_employee_by_id(emp_id INT)
     RETURNS TABLE(id INT, name VARCHAR, profession VARCHAR, salary FLOAT) AS $$
 BEGIN
     RETURN QUERY
-        SELECT *
-        FROM Employee
-        WHERE split_part(name, ' ', 1) ILIKE lastname;
+        SELECT e.id, e.name, e.profession, e.salary
+        FROM Employee e
+        WHERE e.id = emp_id;
 END;
 $$ LANGUAGE plpgsql;
+

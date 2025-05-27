@@ -6,10 +6,11 @@ CREATE OR REPLACE FUNCTION get_all_tables()
                   ) AS $$
 BEGIN
     RETURN QUERY
-        SELECT id, location, status
-        FROM Tables;
-END;
+        SELECT t.id, t.location, t.status
+        FROM public.Tables t;
+END
 $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION update_table_status(p_id INT, p_status VARCHAR)
     RETURNS VOID AS $$
